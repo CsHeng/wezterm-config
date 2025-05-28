@@ -17,7 +17,7 @@ end
 local function HideApp()
    if platform.is_mac then
      return wezterm.action.HideApplication
-   else 
+   else
      return wezterm.action.Hide
    end
  end
