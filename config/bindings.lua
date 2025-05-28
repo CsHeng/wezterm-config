@@ -13,6 +13,15 @@ elseif platform.is_win or platform.is_linux then
    mod.SUPER_REV = 'ALT|CTRL'
 end
 
+-- Hide Application According to os platform
+local function HideApp()
+   if platform.is_mac then
+     return wezterm.action.HideApplication
+   else 
+     return wezterm.action.Hide
+   end
+ end
+
 -- stylua: ignore
 local keys = {
    -- misc/useful --
@@ -25,6 +34,7 @@ local keys = {
       mods = 'NONE',
       action = act.ShowLauncherArgs({ flags = 'FUZZY|WORKSPACES' }),
    },
+   { key = 'F10', mods = 'NONE',    action = HideApp() },
    { key = 'F11', mods = 'NONE',    action = act.ToggleFullScreen },
    { key = 'F12', mods = 'NONE',    action = act.ShowDebugOverlay },
    { key = 'f',   mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = '' }) },
@@ -54,8 +64,8 @@ local keys = {
    { key = 'Backspace',  mods = mod.SUPER,     action = act.SendString '\u{15}' },
 
    -- copy/paste --
-   { key = 'c',          mods = 'CTRL|SHIFT',  action = act.CopyTo('Clipboard') },
-   { key = 'v',          mods = 'CTRL|SHIFT',  action = act.PasteFrom('Clipboard') },
+   { key = 'c',          mods = mod.SUPER,  action = act.CopyTo('Clipboard') },
+   { key = 'v',          mods = mod.SUPER,  action = act.PasteFrom('Clipboard') },
 
    -- tabs --
    -- tabs: spawn+close
@@ -166,12 +176,12 @@ local keys = {
    -- panes: split panes
    {
       key = [[\]],
-      mods = mod.SUPER,
+      mods = mod.SUPER_REV,
       action = act.SplitVertical({ domain = 'CurrentPaneDomain' }),
    },
    {
       key = [[\]],
-      mods = mod.SUPER_REV,
+      mods = mod.SUPER,
       action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
    },
 
