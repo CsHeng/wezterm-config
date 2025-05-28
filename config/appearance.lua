@@ -17,44 +17,47 @@ return {
    animation_fps = 120,
    cursor_blink_ease_in = 'EaseOut',
    cursor_blink_ease_out = 'EaseOut',
-   default_cursor_style = 'BlinkingBlock',
+   default_cursor_style = 'BlinkingBar',
    cursor_blink_rate = 650,
 
    -- color scheme
    -- colors = colors,
     colors = {
-     tab_bar = {
-       background = "#1e1e2e",
-       active_tab = {
-         bg_color = "#89b4fa",
-         fg_color = "#1e1e2e",
-         intensity = "Bold",
-         underline = "None",
-         italic = false,
-         strikethrough = false,
-       },
-       inactive_tab = {
-         bg_color = "#313244",
-         fg_color = "#cdd6f4",
-       },
-       inactive_tab_hover = {
-         bg_color = "#45475a",
-         fg_color = "#f5e0dc",
-         italic = true,
-       },
-       new_tab = {
-         bg_color = "#1e1e2e",
-         fg_color = "#a6adc8",
-       },
-       new_tab_hover = {
-         bg_color = "#89b4fa",
-         fg_color = "#1e1e2e",
-       },
-     },
+        tab_bar = {
+            background = "#002b36", -- Base03 (最暗，tab 背景)
+            active_tab = {
+                bg_color = "#268bd2", -- Blue
+                fg_color = "#fdf6e3", -- Base3 (最亮前景)
+                intensity = "Bold",
+                underline = "None",
+                italic = false,
+                strikethrough = false,
+            },
+            inactive_tab = {
+                bg_color = "#073642", -- Base02
+                fg_color = "#93a1a1", -- Base1
+            },
+            --inactive_tab_hover = {
+            --    bg_color = "#586e75", -- Base01
+            --    fg_color = "#eee8d5", -- Base2
+            --    italic = true,
+            --},
+            --new_tab = {
+            --    bg_color = "#002b36", -- Base03
+            --    fg_color = "#839496", -- Base0
+            --},
+            --new_tab_hover = {
+            --    bg_color = "#268bd2", -- Blue
+            --    fg_color = "#fdf6e3", -- Base3
+            --},
+        },
+        -- 背景色也换掉（整体 Solarized）
+        background = "#002b36",
+        foreground = "#839496",
     },
 
-   -- color_scheme = "Builtin Solarized Dark",
-   color_scheme = "Builtin Catppuccin Mocha",
+    color_scheme = "Builtin Solarized Dark",
+   --color_scheme = "Builtin Catppuccin Mocha",
 
    -- background: pass in `true` if you want wezterm to start with focus mode on (no bg images)
    -- background = backdrops:initial_options(false),
