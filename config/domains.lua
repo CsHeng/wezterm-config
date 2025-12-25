@@ -4,10 +4,16 @@ local wezterm = require 'wezterm'
 local options = {
    -- ref: https://wezfurlong.org/wezterm/config/lua/SshDomain.html
    ssh_domains = {},
+
+   -- ref: https://wezfurlong.org/wezterm/multiplexing.html#unix-domains
+   unix_domains = {},
+
+   -- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
+   wsl_domains = {},
 }
 
 for host, config in pairs(wezterm.enumerate_ssh_hosts()) do
-  table.insert(ssh_domains, {
+  table.insert(options.ssh_domains, {
     -- the name can be anything you want; we're just using the hostname
     name = host,
     -- remote_address must be set to `host` for the ssh config to apply to it
