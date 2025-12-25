@@ -1,16 +1,16 @@
 local wezterm = require('wezterm')
 local platform = require('utils.platform')
-local backdrops = require('utils.backdrops')
+-- local backdrops = require('utils.backdrops')
 local act = wezterm.action
 
 local mod = {}
 
 if platform.is_mac then
    mod.SUPER = 'SUPER'
-   mod.SUPER_REV = 'SUPER|CTRL'
+   mod.SUPER_REV = 'SUPER|SHIFT'
 elseif platform.is_win or platform.is_linux then
    mod.SUPER = 'ALT' -- to not conflict with Windows key shortcuts
-   mod.SUPER_REV = 'ALT|CTRL'
+   mod.SUPER_REV = 'ALT|SHIFT'
 end
 
 -- Hide Application According to os platform
@@ -126,61 +126,61 @@ local keys = {
    },
 
    -- background controls --
-   {
-      key = [[/]],
-      mods = mod.SUPER,
-      action = wezterm.action_callback(function(window, _pane)
-         backdrops:random(window)
-      end),
-   },
-   {
-      key = [[,]],
-      mods = mod.SUPER,
-      action = wezterm.action_callback(function(window, _pane)
-         backdrops:cycle_back(window)
-      end),
-   },
-   {
-      key = [[.]],
-      mods = mod.SUPER,
-      action = wezterm.action_callback(function(window, _pane)
-         backdrops:cycle_forward(window)
-      end),
-   },
-   {
-      key = [[/]],
-      mods = mod.SUPER_REV,
-      action = act.InputSelector({
-         title = 'InputSelector: Select Background',
-         choices = backdrops:choices(),
-         fuzzy = true,
-         fuzzy_description = 'Select Background: ',
-         action = wezterm.action_callback(function(window, _pane, idx)
-            if not idx then
-               return
-            end
-            ---@diagnostic disable-next-line: param-type-mismatch
-            backdrops:set_img(window, tonumber(idx))
-         end),
-      }),
-   },
-   {
-      key = 'b',
-      mods = mod.SUPER,
-      action = wezterm.action_callback(function(window, _pane)
-         backdrops:toggle_focus(window)
-      end)
-   },
+   -- {
+   --    key = [[/]],
+   --    mods = mod.SUPER,
+   --    action = wezterm.action_callback(function(window, _pane)
+   --       backdrops:random(window)
+   --    end),
+   -- },
+   -- {
+   --    key = [[,]],
+   --    mods = mod.SUPER,
+   --    action = wezterm.action_callback(function(window, _pane)
+   --       backdrops:cycle_back(window)
+   --    end),
+   -- },
+   -- {
+   --    key = [[.]],
+   --    mods = mod.SUPER,
+   --    action = wezterm.action_callback(function(window, _pane)
+   --       backdrops:cycle_forward(window)
+   --    end),
+   -- },
+   -- {
+   --    key = [[/]],
+   --    mods = mod.SUPER_REV,
+   --    action = act.InputSelector({
+   --       title = 'InputSelector: Select Background',
+   --       choices = backdrops:choices(),
+   --       fuzzy = true,
+   --       fuzzy_description = 'Select Background: ',
+   --       action = wezterm.action_callback(function(window, _pane, idx)
+   --          if not idx then
+   --             return
+   --          end
+   --          ---@diagnostic disable-next-line: param-type-mismatch
+   --          backdrops:set_img(window, tonumber(idx))
+   --       end),
+   --    }),
+   -- },
+   -- {
+   --    key = 'b',
+   --    mods = mod.SUPER,
+   --    action = wezterm.action_callback(function(window, _pane)
+   --       backdrops:toggle_focus(window)
+   --    end)
+   -- },
 
    -- panes --
    -- panes: split panes
    {
-      key = [[\]],
+      key = 'd',
       mods = mod.SUPER_REV,
       action = act.SplitVertical({ domain = 'CurrentPaneDomain' }),
    },
    {
-      key = [[\]],
+      key = 'd',
       mods = mod.SUPER,
       action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
    },
@@ -194,6 +194,10 @@ local keys = {
    { key = 'j',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Down') },
    { key = 'h',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Left') },
    { key = 'l',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Right') },
+   { key = 'UpArrow',    mods = mod.SUPER, action = act.ActivatePaneDirection('Up') },
+   { key = 'DownArrow',  mods = mod.SUPER, action = act.ActivatePaneDirection('Down') },
+   { key = 'LeftArrow',  mods = mod.SUPER, action = act.ActivatePaneDirection('Left') },
+   { key = 'RightArrow', mods = mod.SUPER, action = act.ActivatePaneDirection('Right') },
    {
       key = 'p',
       mods = mod.SUPER_REV,
@@ -201,8 +205,8 @@ local keys = {
    },
 
    -- panes: scroll pane
-   { key = 'u',        mods = mod.SUPER, action = act.ScrollByLine(-5) },
-   { key = 'd',        mods = mod.SUPER, action = act.ScrollByLine(5) },
+   -- { key = 'u',        mods = mod.SUPER, action = act.ScrollByLine(-5) },
+   -- { key = 'd',        mods = mod.SUPER, action = act.ScrollByLine(5) },
    { key = 'PageUp',   mods = 'NONE',    action = act.ScrollByPage(-0.75) },
    { key = 'PageDown', mods = 'NONE',    action = act.ScrollByPage(0.75) },
 

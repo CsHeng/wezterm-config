@@ -3,7 +3,7 @@ local gpu_adapters = require('utils.gpu-adapter')
 --local colors = require('colors.custom')
 
 return {
-   window_decorations = "INTEGRATED_BUTTONS|RESIZE", -- "INTEGRATED_BUTTONS|RESIZE"
+   window_decorations = "RESIZE", -- "INTEGRATED_BUTTONS|RESIZE|NONE"
 
    max_fps = 120,
    front_end = 'WebGpu', ---@type 'WebGpu' | 'OpenGL' | 'Software'
@@ -53,7 +53,7 @@ return {
         },
         -- 背景色也换掉（整体 Solarized）
         background = "#002b36",
-        foreground = "#839496",
+        foreground = "#e0e0e0",
     },
 
     color_scheme = "Builtin Solarized Dark",
@@ -86,9 +86,9 @@ return {
 
    -- tab bar
    enable_tab_bar = true,
-   hide_tab_bar_if_only_one_tab = false,
-   use_fancy_tab_bar = true,
-   tab_max_width = 25,
+   hide_tab_bar_if_only_one_tab = true, -- Hide tab bar when only one tab
+   use_fancy_tab_bar = false, -- Use simpler tab style like ghostty/iterm
+   tab_max_width = 1000, -- Large value to enable equal-width tabs
    tab_bar_at_bottom = false,
    show_tab_index_in_tab_bar = false,
    switch_to_last_active_tab_when_closing_tab = true,
