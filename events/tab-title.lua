@@ -41,8 +41,8 @@ local nf = wezterm.nerdfonts
 
 local M = {}
 
-local GLYPH_SCIRCLE_LEFT = nf.ple_left_half_circle_thick --[[  ]]
-local GLYPH_SCIRCLE_RIGHT = nf.ple_right_half_circle_thick --[[  ]]
+local GLYPH_SCIRCLE_LEFT = '' --[[ removed ]]
+local GLYPH_SCIRCLE_RIGHT = '' --[[ removed ]]
 local GLYPH_CIRCLE = nf.fa_circle --[[  ]]
 local GLYPH_ADMIN = nf.md_shield_half_full --[[ 󰞀 ]]
 local GLYPH_LINUX = nf.cod_terminal_linux --[[  ]]
@@ -125,10 +125,13 @@ end
 local function create_title(process_name, base_title, max_width, inset)
    local title
 
+   -- Extract hostname from "hostname: process" format
+   local short_host = base_title:match('^([^:]+):') or base_title
+
    if process_name:len() > 0 then
-      title = process_name .. ' ~ ' .. base_title
+      title = process_name .. ' ~ ' .. short_host
    else
-      title = base_title
+      title = short_host
    end
 
    if base_title == 'Debug' then
