@@ -3,7 +3,34 @@ local wezterm = require('wezterm')
 -- local backdrops = require('utils.backdrops')
 -- local colors = require('colors.custom')
 
-return {
+local function pick_color_scheme()
+   local schemes = wezterm.get_builtin_color_schemes()
+   local preferred = {
+      'Builtin Dracula',
+      'Dracula',
+      'Builtin Catppuccin Mocha',
+      'Catppuccin Mocha',
+      'Builtin Tokyo Night',
+      'Tokyo Night',
+      'Builtin One Dark',
+      'One Dark',
+      'Builtin Nord',
+      'Nord',
+      'Builtin Gruvbox Dark',
+      'Gruvbox Dark',
+   }
+
+   for _, name in ipairs(preferred) do
+      if schemes[name] ~= nil then
+         return name
+      end
+   end
+
+   -- Fall back to wezterm defaults by not setting a scheme name.
+   return nil
+end
+
+local config = {
    window_decorations = "RESIZE", -- "INTEGRATED_BUTTONS|RESIZE|NONE"
 
    max_fps = 144,
@@ -32,7 +59,7 @@ return {
    -- color_scheme = "Solarized Dark - Patched",
    -- color_scheme = "Builtin Solarized Dark",
    -- color_scheme = "Builtin Catppuccin Mocha",
-   color_scheme = "Builtin Dracula",
+   color_scheme = pick_color_scheme(),
    -- color_scheme = "Builtin Tokyo Night",
    -- color_scheme = "Builtin One Dark",
    -- color_scheme = "Builtin Nord",
@@ -52,13 +79,13 @@ return {
          width = '120%',
          vertical_offset = '-10%',
          horizontal_offset = '-10%',
-         opacity = 0.9,
+         opacity = 0.92,
       },
    },
 
    -- window background
-   window_background_opacity = 0.9,
-   text_background_opacity = 0.9,
+   window_background_opacity = 0.92,
+   text_background_opacity = 0.92,
 
    -- scrollbar
    enable_scroll_bar = true,
@@ -107,3 +134,5 @@ return {
       target = 'CursorColor',
    },
 }
+
+return config

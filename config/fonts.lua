@@ -6,8 +6,7 @@ local font_presets = {
   hack_regular = {
     font = wezterm.font_with_fallback({
       { family = 'Hack Nerd Font', weight = 'Regular' },
-      -- { family = 'Noto Sans Mono CJK SC' },
-      { family = 'Maple Mono NF CN', weight = 'Regular' },
+      { family = 'Noto Sans Mono CJK SC' },
       'Apple Symbols',
     }),
     font_size = platform.is_mac and 15 or 12,
@@ -45,7 +44,7 @@ local font_presets = {
       'Apple Symbols',
     }),
     font_size = platform.is_mac and 15 or 12,
-    line_height = 1.05,
+    line_height = 1.0,
     cell_width = 1.0,
   },
 
@@ -55,7 +54,7 @@ local font_presets = {
       'Apple Symbols',
     }),
     font_size = platform.is_mac and 15 or 12,
-    line_height = 1.0,
+    line_height = 1.05,
     cell_width = 1.0,
   },
 
@@ -81,10 +80,22 @@ local font_presets = {
     line_height = 1.0,
     cell_width = 1.0,
   },
+
+  -- Consolas
+  consolas = {
+    font = wezterm.font_with_fallback({
+      { family = 'Consolas for Powerline', weight = 'Regular' },
+      'Apple Symbols',
+    }),
+    font_size = platform.is_mac and 15 or 12,
+    line_height = 1.0,
+    cell_width = 1.0,
+  },
 }
 
 -- 切换预设：修改 active_font 为上面 font_presets 中的任意 key
 -- 可选值（按主字体字母排序）：
+--   - consolas
 --   - hack_regular
 --   - jetbrains_bold
 --   - jetbrains_regular
@@ -92,7 +103,7 @@ local font_presets = {
 --   - maple_regular
 --   - meslo_regular
 --   - sarasa_medium
-local active_font = font_presets.maple_bold
+local active_font = font_presets.maple_regular
 
 return {
 
@@ -107,5 +118,5 @@ return {
   freetype_render_target = 'Normal', ---@type 'Normal'|'Light'|'Mono'|'HorizontalLcd'
 
   -- 禁 ligature / calt，避免 glyph 重排
-  harfbuzz_features = { 'calt=0', 'liga=0', 'clig=0', 'kern=0' },
+  -- harfbuzz_features = { 'calt=0', 'liga=0', 'clig=0', 'kern=0', 'dlint=0', 'hlig=0' },
 }
